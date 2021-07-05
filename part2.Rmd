@@ -1,0 +1,336 @@
+---
+title: 'Part 2: Summarizing, transforming, and cleaning data using `dplyr`'
+author: "You!"
+date: "7/5/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Reminder to open up the `part4.Rproj` file before you do anything
+
+Please do so if you haven't.
+
+# Intro slides:
+
+Link to video: <https://youtu.be/7KZWcICwF54?t=976>
+
+```{r}
+vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=976")
+```
+
+# Learning Objectives
+
+-   **Learn** and apply `mutate()` to change the data type of a variable
+-   **Apply** `mutate()` to calculate a new variable based on other variables in a `data.frame`.
+-   **Apply** `case_when` in a `mutate()` statement to make a continuous variable categorical
+-   **Apply** `group_by()/summarize()` as a pattern to get summary statistics, including counts, means, and standard deviations within a category.
+-   **Standardize** variable names using `clean_names()`
+
+## Getting set up
+
+```{r prep, message=FALSE, warning=FALSE}
+# load libraries
+library(tidyverse)
+library(readxl)`
+library(janitor)
+
+
+cereals <- read_excel("data/cereal.xlsx", 
+                             sheet=1, 
+                             na="NA")
+```
+
+# `mutate()` - A confusing name, a powerful `dplyr` verb
+
+```{r}
+knitr::include_graphics("image/dplyr_mutate.png")
+```
+
+So what is mutate? `mutate()` is one of the most useful `dplyr` verbs. You can use it to transform data (variables in your `data.frame`) and add it as a new variable into the data.frame.
+
+I tend to think of this much like adding a formula in Excel to calculate the value of a new column based on previous columns. You can do lots of things such as:
+
+-   subtract one column from another
+-   convert the units of one column to new units (such as days to years)
+-   change the capitalization of categories in a variable
+-   recode a continuous variable to be a categorical one
+
+## Using `mutate` to calculate a new variable based on other variables
+
+One use for `mutate` is to do Excel type calculations using other columns on the data. For instance, we might want to calculate the sum of `age_at_diagnoses`and `days_to_death` to get the `age_at_death`.
+
+```{r}
+cereals %>% 
+    mutate(fat_and_sugar = sugars + fat) 
+```
+
+## Your Turn
+
+Create a variable called `fat_calories` by multiplying `fat` by `9` below:
+
+```{r}
+cereals %>%
+    mutate(fat_calories = -------) 
+
+```
+
+## Using `mutate` to make our `character` variables into `factors`
+
+Remember `factor`s? Well, we can use `mutate()` to make a `character` variable a `factor`.
+
+Let's convert `type` from `character` into `factor`. We'll then pipe the output into `glimpse()` so you can see the variable types.
+
+```{r}
+cereals %>% 
+    #reassign the type variable to be a factor
+    mutate(type = factor(type)) %>%
+    glimpse()
+```
+
+One thing to notice: we are doing something called *reassignment* here. We're taking the previous values of our variable (`type`), doing something to it (making it a `factor`), and then reassigning the variable `type` to our fixed set of values.
+
+Remember when we wanted to decide the order of the categories in the factor? We can assign that order using the `levels` argument in `factor()`. To show the order, we can pipe the output into a command called `tabyl()`, from the `janitor` package, which is a `tidyverse` friendly version of `table()`.
+
+```{r}
+cereals %>% 
+    #reassign the type variable to be a factor
+    mutate(type = factor(type, levels = c("female", "male"))) %>%
+    tabyl(type)
+```
+
+Notice that the `female` value goes before the `male`, which is what we wanted.
+
+## Using `mutate` to replace missing values with `replace_na`
+
+Link to video: <https://youtu.be/7KZWcICwF54?t=2878>
+
+```{r}
+vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=2878")
+```
+
+Sometimes we want to fill in missing values with a certain value. We can use the `replace_na()` function inside of `mutate()` to specify this. For example, if the days to last follow up is missing, we want to set their days to follow up to 0. The first two observations in this data have missing follow up, but when we replace them we note they are now equal to 0:
+
+```{r}
+cereals %>%
+    mutate(days_to_last_follow_up = replace_na(days_to_last_follow_up, 0)) %>%
+    glimpse()
+```
+
+## Using `mutate` to make a continuous variable categorical using `case_when`
+
+Link to Video: <https://youtu.be/7KZWcICwF54?t=3085>
+
+```{r}
+vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=3085")
+```
+
+```{r}
+knitr::include_graphics("image/dplyr_case_when.png")
+```
+
+Say we want to make the `cigarettes_per_day` into a categorical variable with the values:
+
+-   0-5 cigarettes/day
+-   6+ cigarettes/day
+
+How would we do that?
+
+Well, we need to follow the basic pattern for each of our categories:
+
+*condition* \~ *category name*
+
+The *left* side of the `~` is where we can specify how we define the \*category&.
+
+The *right* side of the `~` is where we can specify the *category name* (as a character).
+
+In the example below,
+
+`cigarettes_per_day <= 5` is our left side, and `0-5` is our right side (our category).
+
+We need to do this for each level in our category.
+
+```{r}
+cereals %>% 
+    mutate(
+        cigarettes_category = case_when(
+            cigarettes_per_day <= 5 ~ '0-5',
+            cigarettes_per_day > 5 ~ '6+'
+            )
+        ) %>%
+    mutate(cigarettes_category = 
+               factor(cigarettes_category,
+                      levels = c("0-5", "6+")
+                      )
+           ) %>%
+    tabyl(cigarettes_category)
+    
+```
+
+## Your Turn
+
+Modify the code below to recode `cigarettes_category` to have 3 levels:
+
+-   `0-5`
+-   `6-10`
+-   `11+`
+
+Hint: you'll have to chain conditions with a `&` to get the `6-10` category.
+
+```{r}
+cereals %>% 
+    mutate(
+        cigarettes_category = case_when(
+            cigarettes_per_day <= 5 ~ '0-5',
+            cigarettes_per_day > 5 ~ '6+'
+            )
+        ) %>%
+    mutate(cigarettes_category = 
+               factor(cigarettes_category,
+                      levels = c("0-5", "6+")
+                      )
+           ) %>%
+    tabyl(cigarettes_category)
+    
+```
+
+# `summarize()`
+
+Link to video: <https://youtu.be/7KZWcICwF54?t=4368>
+
+```{r}
+vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=4368")
+```
+
+The `summarize()` verb produces summaries across your data.
+
+For example, if I wanted to find the average `cigarettes_per_day` across all my data, I'd do this:
+
+```{r}
+cereals %>%
+    summarize(average_cigarettes = mean(cigarettes_per_day))
+
+```
+
+Note we need to be careful if there are missing values in the variable we are summarizing, compare these two results:
+
+```{r}
+cereals %>%
+    summarize(average_yrs_smoked = mean(years_smoked))
+
+cereals %>%
+    summarize(average_yrs_smoked = mean(years_smoked, na.rm = TRUE))
+
+```
+
+What are the kinds of things that summarize is useful for?
+
+Useful functions (from <https://dplyr.tidyverse.org/reference/summarise.html>)
+
+Center: `mean()`, `median()` Spread: `sd()` (standard deviation) Range: `min()`, `max()` Position: `first()`, `last()`, `nth()` Count: `n()`, `n_distinct()`
+
+By itself, `summarize()` is ok. But it's really combined with `group_by()` that it becomes extremely powerful.
+
+# `group_by()/summarize()`
+
+Link to video: <https://youtu.be/7KZWcICwF54?t=4575>
+
+```{r}
+vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=4575")
+```
+
+These two verbs always go together. `group_by()` doesn't do anything by itself, output wise. But what it does is split our data frame into a number of smaller `data.frame`s split out by category. Then we use `summarize` to do some sort of summary calculation (such as counting or calculating the mean) on these smaller `data.frame`s:
+
+For example, if we want to calculate the mean `cigarettes_per_day` smoked between `male`s and `female`s, we'd do the following:
+
+```{r}
+cereals %>%
+   group_by(type) %>%
+   summarize(mean_cigarettes = mean(cigarettes_per_day))
+```
+
+## `group_by()/summarize` to calculate mean and standard deviation values
+
+Below, we'll calculate the average number of cigarettes smoked per day for males and females, and the standard deviation.
+
+```{r}
+cereals %>%
+    group_by(type) %>%
+    summarize(mean = mean(cigarettes_per_day), 
+              sd = sd(cigarettes_per_day))
+```
+
+## `group_by()` to `count()` things
+
+What if we want to know the number of subjects in our dataset with each type of `shelf`? We can use the `n()` function.
+
+```{r}
+cereals %>%
+    group_by(shelf) %>%
+    summarize(count = n())
+```
+
+We can also use the `count()` function directly:
+
+```{r}
+cereals %>%
+    count(shelf)
+```
+
+## Your Turn
+
+Use `group_by()/summarize()` to calculate the maximum `rating` within each `shelf` category.
+
+```{r}
+cereals %>%
+    group_by(------) %>%
+    summarize(max_rating = -------)
+
+```
+
+
+# Standardizing variable names: `clean_names()`
+
+```{r}
+knitr::include_graphics("image/janitor_clean_names.png")
+```
+
+The last package we'll talk about today is the `janitor` package. This package adds some really useful functions for *cleaning* data.
+
+The one I use the most is called `clean_names()`. This will mutate column names into a standard format - all character values will be lowercase and spaces will be converted to underscores.
+
+The `cereals` dataset has already had this function applied to it, but let's create a smaller example dataset where this wouldn't be the case.
+
+```{r}
+smoke_bad_colnames <- read_csv("data/smoke_bad_colnames.csv")
+smoke_bad_colnames
+```
+
+Ack! These column names have spaces, inconsistent capitalization, which make these difficult to work with.
+
+So let's use `clean_names()` to fix this:
+
+```{r}
+smoke_good_colnames <- smoke_bad_colnames %>%
+    clean_names()
+
+smoke_good_colnames
+```
+
+By default, `clean_names()` converts to snake case (spaces between words are replaced by an underscore `_`). `clean_names()` will help you standardize your dataset's column names.
+
+## Using `rename()` to rename!
+
+We can easily change names by hand, as well, with the `rename()` function in `dplyr` which is essentially a wrapper for `mutate()`:
+
+```{r}
+smoke_good_colnames %>%
+    rename(age = age_at_diagnosis) %>%
+    glimpse()
+```
