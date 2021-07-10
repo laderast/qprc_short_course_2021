@@ -20,6 +20,7 @@ library(broom)
 
 https://cran.r-project.org/web/packages/mvMonitoring/vignettes/MVSPC-Workflow.html
 
+https://www.bupar.net/index.html
 
 ## R Markdown
 
@@ -71,11 +72,21 @@ general_mills <- tq_get('GIS',
 ```
 
 ```{r}
-tickers = c("AAPL", "NFLX", "AMZN", "K", "O")
+tickers = c("GIS", "K")
 
 prices <- tq_get(tickers,
                  from = "2017-01-01",
-                 to = "2017-03-01",
+                 to = params$date,
                  get = "stock.prices")
+```
+
+```{r}
+prices %>%
+  select(date, symbol, adjusted) %>%
+  ggplot() +
+  aes(x=date,
+      group=symbol,
+      y=adjusted, color=symbol) +
+  geom_line()
 ```
 
