@@ -9,21 +9,9 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Reminder to open up the `part4.Rproj` file before you do anything
 
 Please do so if you haven't.
-
-# Intro slides:
-
-Link to video: <https://youtu.be/7KZWcICwF54?t=976>
-
-```{r}
-vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=976")
-```
 
 # Learning Objectives
 
@@ -38,7 +26,7 @@ vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=976")
 ```{r prep, message=FALSE, warning=FALSE}
 # load libraries
 library(tidyverse)
-library(readxl)`
+library(readxl)
 library(janitor)
 
 
@@ -101,44 +89,37 @@ Remember when we wanted to decide the order of the categories in the factor? We 
 ```{r}
 cereals %>% 
     #reassign the type variable to be a factor
-    mutate(type = factor(type, levels = c("female", "male"))) %>%
+    mutate(type = factor(type, levels = c("C", "H"))) %>%
     tabyl(type)
 ```
 
-Notice that the `female` value goes before the `male`, which is what we wanted.
+Notice that the `C` value goes before the `H`, which is what we wanted.
+
+```{r}
+library(visdat)
+
+vis_dat(cereals)
+
+```
+
 
 ## Using `mutate` to replace missing values with `replace_na`
 
-Link to video: <https://youtu.be/7KZWcICwF54?t=2878>
-
-```{r}
-vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=2878")
-```
 
 Sometimes we want to fill in missing values with a certain value. We can use the `replace_na()` function inside of `mutate()` to specify this. For example, if the days to last follow up is missing, we want to set their days to follow up to 0. The first two observations in this data have missing follow up, but when we replace them we note they are now equal to 0:
 
 ```{r}
 cereals %>%
-    mutate(days_to_last_follow_up = replace_na(days_to_last_follow_up, 0)) %>%
+    mutate(sodium = replace_na(sodium, 0)) %>%
     glimpse()
 ```
 
 ## Using `mutate` to make a continuous variable categorical using `case_when`
 
-Link to Video: <https://youtu.be/7KZWcICwF54?t=3085>
+Say we want to make `fat` into a categorical variable called `fat_category` with the values:
 
-```{r}
-vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=3085")
-```
-
-```{r}
-knitr::include_graphics("image/dplyr_case_when.png")
-```
-
-Say we want to make the `cigarettes_per_day` into a categorical variable with the values:
-
--   0-5 cigarettes/day
--   6+ cigarettes/day
+-  Low: 0-2 grams of fat/serving
+-  High: 3+ grams of fat/serving
 
 How would we do that?
 
@@ -152,24 +133,24 @@ The *right* side of the `~` is where we can specify the *category name* (as a ch
 
 In the example below,
 
-`cigarettes_per_day <= 5` is our left side, and `0-5` is our right side (our category).
+`fat <= 2` is our left side, and `low` is our right side (our category).
 
 We need to do this for each level in our category.
 
 ```{r}
 cereals %>% 
     mutate(
-        cigarettes_category = case_when(
-            cigarettes_per_day <= 5 ~ '0-5',
-            cigarettes_per_day > 5 ~ '6+'
+        fat_category = case_when(
+            fat <= 2 ~ 'low',
+            fat > 2 ~ 'high'
             )
         ) %>%
-    mutate(cigarettes_category = 
-               factor(cigarettes_category,
-                      levels = c("0-5", "6+")
+    mutate(fat_category = 
+               factor(fat_category,
+                      levels = c("low", "high")
                       )
            ) %>%
-    tabyl(cigarettes_category)
+    tabyl(fat_category)
     
 ```
 
@@ -202,30 +183,23 @@ cereals %>%
 
 # `summarize()`
 
-Link to video: <https://youtu.be/7KZWcICwF54?t=4368>
-
-```{r}
-vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=4368")
-```
-
 The `summarize()` verb produces summaries across your data.
 
 For example, if I wanted to find the average `cigarettes_per_day` across all my data, I'd do this:
 
 ```{r}
 cereals %>%
-    summarize(average_cigarettes = mean(cigarettes_per_day))
-
+    summarize(average_calories = mean(calories))
 ```
 
 Note we need to be careful if there are missing values in the variable we are summarizing, compare these two results:
 
 ```{r}
 cereals %>%
-    summarize(average_yrs_smoked = mean(years_smoked))
+    summarize(average_sodium = mean(sodium))
 
 cereals %>%
-    summarize(average_yrs_smoked = mean(years_smoked, na.rm = TRUE))
+    summarize(average_sodium = mean(sodium, na.rm = TRUE))
 
 ```
 
@@ -239,20 +213,14 @@ By itself, `summarize()` is ok. But it's really combined with `group_by()` that 
 
 # `group_by()/summarize()`
 
-Link to video: <https://youtu.be/7KZWcICwF54?t=4575>
-
-```{r}
-vembedr::embed_url("https://youtu.be/7KZWcICwF54?t=4575")
-```
-
 These two verbs always go together. `group_by()` doesn't do anything by itself, output wise. But what it does is split our data frame into a number of smaller `data.frame`s split out by category. Then we use `summarize` to do some sort of summary calculation (such as counting or calculating the mean) on these smaller `data.frame`s:
 
 For example, if we want to calculate the mean `cigarettes_per_day` smoked between `male`s and `female`s, we'd do the following:
 
 ```{r}
 cereals %>%
-   group_by(type) %>%
-   summarize(mean_cigarettes = mean(cigarettes_per_day))
+   group_by(shelf) %>%
+   summarize(mean_calories = mean(calories))
 ```
 
 ## `group_by()/summarize` to calculate mean and standard deviation values
@@ -261,9 +229,9 @@ Below, we'll calculate the average number of cigarettes smoked per day for males
 
 ```{r}
 cereals %>%
-    group_by(type) %>%
-    summarize(mean = mean(cigarettes_per_day), 
-              sd = sd(cigarettes_per_day))
+   group_by(shelf) %>%
+   summarize(mean_calories = mean(calories),
+             sd_calories = sd(calories))
 ```
 
 ## `group_by()` to `count()` things

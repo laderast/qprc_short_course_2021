@@ -10,12 +10,11 @@ library(vembedr)
 
 ```
 
-In this session, we'll continue our introduction to R by working with a large dataset that more closely resembles that which you may encounter while analyzing data for research.
+# Welcome to the Short Course!
 
-# Before you get started
+## Before you get started
 
-Remember to save this notebook under a new name, such as `part2_laderas.Rmd`.
-
+Remember to save this notebook under a new name, such as `part1_laderas.Rmd`.
 
 # Learning Objectives
 
@@ -29,13 +28,13 @@ By the end of this session, you should be able to:
 
 ## A note about Base R versus the Tidyverse
 
-For the remainder of this course, we'll be focusing on using functions from the [tidyverse](https://www.tidyverse.org/).
+In this course, we'll be focusing on using functions from the [tidyverse](https://www.tidyverse.org/).
 
 It is set up as a *library* - functions someone else wrote that are not built into R. We'll use quite a few libraries in this course.
 
 The Tidyverse is essentially a library of libraries -- each of these libraries contains functions that are either essential for or *greatly* simplify the process of data manipulation and visualization for data scientists.
 
-We have already installed the `tidyverse` for you. For reading excel files, we also need to load up an additional library called `readxl`.
+We have already installed the `tidyverse` for you in Rstudio.cloud. For reading excel files, we also need to load up an additional library called `readxl`.
 
 ```{r warning=F, message=FALSE}
 #load the required libraries
@@ -48,17 +47,15 @@ library(readxl)
 
 ```{r}
 knitr::include_graphics("image/project2.JPG")
-
 ```
 
 Once you have your notebook open, let's talk about its location. It is located where the `project.rproj` file. The location of this file (also called an "RProject" file) is always considered the `root` directory of the project.
 
 It's where you start from that determines the file directory path for loading data.
 
-Since this notebook, `part2.Rmd` is in the same folder as the `project.rproj` file, then when we need to refer to data files, it is *relative* to the root folder.
+Since this notebook, `part1.Rmd` is in the same folder as the `project.rproj` file, then when we need to refer to data files, it is *relative* to the root folder.
 
 When you're starting out, it's best to keep your RMarkdown notebooks and files in the **root** folder. It will help prevent you from dealing with a lot of headaches.
-
 
 ## A good place to put your data
 
@@ -67,8 +64,6 @@ Take a look at the `data/` folder, and where the `cereal.xlsx` file is.
 In our notebook, how do we refer to that file name? Since we're in the root, we can refer to it as
 
 `data/cereal.xlsx`
-
-
 
 ## Loading our excel file
 
@@ -80,44 +75,58 @@ cereals <- read_excel("data/cereal.xlsx",
                      na = "NA")
 ```
 
-
 You should see `cereals` appear in the Environment window on the upper right panel in RStudio. If you click on `cereals` there, a new tab will appear next to your R script in the Source window.
 
 > Clicking on the name of an object in the Environment window is a shortcut for running `View(cereals)`; you'll see this code appear in the Console after clicking.
 
-
 ## Notes on the Data
 
-Dataset Link: https://www.kaggle.com/crawford/80-cereals
+Dataset Link: <https://www.kaggle.com/crawford/80-cereals>
 
 Fields in the dataset:
 
-- `Name`: Name of cereal
-- `mfr`: Manufacturer of cereal
-    - A = American Home Food Products;
-    - G = General Mills
-    - K = Kelloggs
-    - N = Nabisco
-    - P = Post
-    - Q = Quaker Oats
-    - R = Ralston Purina
-- `type`:
-    - cold
-    - hot
-- `calories`: calories per serving
-- `protein`: grams of protein
-- `fat`: grams of fat
-- `sodium`: milligrams of sodium
-- `fiber`: grams of dietary fiber
-- `carbo`: grams of complex carbohydrates
-- `sugars`: grams of sugars
-- `potass`: milligrams of potassium
-- `vitamins`: vitamins and minerals - 0, 25, or 100, indicating the typical percentage of FDA recommended
-- `shelf`: display shelf (1, 2, or 3, counting from the floor)
-- `weight`: weight in ounces of one serving
-- `cups`: number of cups in one serving
-- `rating`: a rating of the cereals (Possibly from Consumer Reports?)
+-   `Name`: Name of cereal
 
+-   `mfr`: Manufacturer of cereal
+
+    -   A = American Home Food Products;
+    -   G = General Mills
+    -   K = Kelloggs
+    -   N = Nabisco
+    -   P = Post
+    -   Q = Quaker Oats
+    -   R = Ralston Purina
+
+-   `type`:
+
+    -   cold
+    -   hot
+
+-   `calories`: calories per serving
+
+-   `protein`: grams of protein
+
+-   `fat`: grams of fat
+
+-   `sodium`: milligrams of sodium
+
+-   `fiber`: grams of dietary fiber
+
+-   `carbo`: grams of complex carbohydrates
+
+-   `sugars`: grams of sugars
+
+-   `potass`: milligrams of potassium
+
+-   `vitamins`: vitamins and minerals - 0, 25, or 100, indicating the typical percentage of FDA recommended
+
+-   `shelf`: display shelf (1, 2, or 3, counting from the floor)
+
+-   `weight`: weight in ounces of one serving
+
+-   `cups`: number of cups in one serving
+
+-   `rating`: a rating of the cereals (Possibly from Consumer Reports?)
 
 ## Introducing `ggplot2`
 
@@ -271,10 +280,9 @@ Now we've re-created the above plot! Let's save it using `ggsave()`. `ggsave()` 
 ggsave("sugar-plot.jpg")
 ```
 
-
 ## Customizing our Scatterplot
 
-Now that we have the data generally displayed the way we'd like, we can start to customize a plot.
+Now that we have the data generally displayed the way we'd like, we can start to customize a plot. Let's assign our plot as an object named `our_plot`:
 
 ```{r}
 our_plot <- ggplot(data = cereals) +
@@ -335,9 +343,6 @@ ggsave("awesomePlot.jpg", width = 10, height = 10, dpi = 300)
 
 This automatically saves the last plot for which code was executed. This command interprets the file format for export using the file suffix you specify. The other arguments dictate the size (`width` and `height`) and resolution (`dpi`).
 
-
-
-
 ## Boxplots
 
 Boxplots compare the distribution of a quantitative variable among categories.
@@ -397,7 +402,7 @@ ggplot(cereals) +
   
   geom_boxplot() +
   
-  facet_wrap(vars(factor(shelf)))
+  facet_wrap(vars(factor(------)))
 
 ```
 
@@ -486,11 +491,11 @@ our_plot +
 
 Other useful label\_ functions for formatting labels:
 
-- `label_date()` - Lets you control the way dates are formatted on the axis 
-- `label_scientific()` - lets you format the labels with scientific notation 
-- `label_pvalue()` - formatting specific to p-values
+-   `label_date()` - Lets you control the way dates are formatted on the axis
+-   `label_scientific()` - lets you format the labels with scientific notation
+-   `label_pvalue()` - formatting specific to p-values
 
-## scale_color_manual() - mapping discrete colors to categories
+## scale\_color\_manual() - mapping discrete colors to categories
 
 If you want to customize the colors values in your data set are mapped to, you can use `scale_color_manual()`:
 
@@ -514,6 +519,8 @@ names(wes_palettes)
 ```{r}
 wes_palette("IsleofDogs1")
 ```
+
+[to fix]
 
 ```{r}
 our_plot +
@@ -548,7 +555,7 @@ ggplot(cereals) +
 
   aes(x = sugars, 
       y = rating, 
-      color = mfr) +
+      color = fat) +
   
   geom_point(alpha = 0.5) +
   
@@ -591,8 +598,6 @@ The `{paleteer}` package has a lot of other palettes:
 
 <https://emilhvitfeldt.github.io/paletteer/>
 
-
 ## Further learning
 
 If you are interested in learning more about ggplot: - Documentation for all `ggplot` features is available [here](https://ggplot2.tidyverse.org). - RStudio also publishes a [ggplot cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) that is really handy! - [Customizing ggplot2 Cheatsheet](http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/) is also handy, because it organizes ggplot2 commands by task.
-

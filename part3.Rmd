@@ -22,55 +22,6 @@ https://cran.r-project.org/web/packages/mvMonitoring/vignettes/MVSPC-Workflow.ht
 
 https://www.bupar.net/index.html
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r}
-stocks <- c("GIS", "K", "NA")
-start <- params$date
-end <- params$date
-
-
-options("getSymbols.warning4.0"=FALSE)
-options("getSymbols.yahoo.warning"=FALSE)
-
-
-getSymbols(Symbols = "GE", from = start, to = end,auto.assign = FALSE)
-
-stocks = as.xts(data.frame(GIS = GIS$GIS.Adjusted, , WFC = WFC[, "WFC.Adjusted"]))
-
-
-## Not run: 
-setSymbolLookup(QQQQ='yahoo',SPY='MySQL')
-
-getSymbols(c('QQQQ','SPY'))                
-# loads QQQQ from yahoo (set with setSymbolLookup)
-# loads SPY from MySQL (set with setSymbolLookup)
-
-getSymbols('F')       
-# loads Ford market data from yahoo (the formal default)
-
-setDefaults(getSymbols,verbose=TRUE,src='MySQL')
-getSymbols('DIA')                 
-# loads symbol from MySQL database (set with setDefaults)
-
-getSymbols('F',src='yahoo',return.class='ts') 
-# loads Ford as time series class ts 
-
-## End(Not run)
-```
-
-```{r}
-general_mills <- tq_get('GIS',
-               from = params$date,
-               to = params$date,
-               get = "stock.prices")
-
-```
-
 ```{r}
 tickers = c("GIS", "K")
 
