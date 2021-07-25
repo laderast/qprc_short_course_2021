@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 -   **List** 5 key `{dplyr}` verbs for data manipulation
 -   **Sort** a dataset by columns using `arrange()`
+-   **Utilize** the pipe (`%>%`) to chain `{dplyr}` verbs together.
 -   **Select** columns from a dataset using `select()`
 -   **Learn** and apply `mutate()` to change the data type of a variable
 -   **Apply** `mutate()` to calculate a new variable based on other variables in a `data.frame`.
@@ -28,18 +29,16 @@ library(tidyverse)
 library(readxl)
 library(janitor)
 
-cereals <- read_excel("data/cereals.xlsx", 
+cereals <- read_excel("data/cereal.xlsx", 
                              sheet=1, 
                              na="NA")
 ```
-
 
 # Data Manipulation using `dplyr`
 
 ```{r}
 knitr::include_graphics("image/dplyr_wrangling.png")
 ```
-
 
 What we have learned is so far is pretty great overall for plotting. But there are a lot of other things we can do with `data.frame`s!
 
@@ -139,6 +138,21 @@ ggplot(data=filtered_cereals) +
   aes(x = fat) +
   geom_histogram()
 ```
+
+## A Note on the new R-native pipe (`|>`)
+
+The pipe we've been using is part of the `{magrittr}` package. As of R 4.0, there is a new pipe that is native to R, which uses the `|>` characters instead of `%>%`:
+
+```{r}
+filtered_cereals <- cereals |>
+  filter(mfr == "N")
+
+ggplot(data=filtered_cereals) +
+  aes(x = fat) +
+  geom_histogram()
+```
+
+The native pipe does have better performance overall. I haven't switched my code over yet.
 
 ## Sorting Data Frames using `arrange()`
 
@@ -274,7 +288,6 @@ smoke_complete %>%
 ## More about Comparison and Logical Operators
 
 This is a useful reference for all the different operators (both logical and comparison) that you can use: <https://www.datamentor.io/r-programming/operator/>
-
 
 # `mutate()` - A confusing name, a powerful `dplyr` verb
 
@@ -566,7 +579,6 @@ cereals %>%
 
 ```
 
-
 ## The difference between `filter()` and `select()`
 
 One thing to keep in mind is that:
@@ -588,10 +600,9 @@ write_excel_csv(x = processed_data,
                 path = "data/processed_data.csv")
 ```
 
-
 # Final Assignment: Be Creative
 
-Ask a question of the `cereals` dataset that you can use group\_by/summarize about, or plot the relationship between two variables.
+Ask a question of the `cereals` dataset that you can use group_by/summarize about, or plot the relationship between two variables.
 
 Share your code with others in your breakout room. What did they find about the `cereals` data?
 

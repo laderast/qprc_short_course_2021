@@ -1,4 +1,5 @@
 ---
+g---
 title: "Part 1: Visualizing data with ggplot2"
 author: "You!"
 output: html_document
@@ -292,7 +293,7 @@ ggplot(data = cereals) +
 
 ```
 
-Now we've re-created the above plot! 
+Now we've re-created the above plot!
 
 Let's save it using `ggsave()`. `ggsave()` saves the last created plot to a file. We'll save it as a `jpg` file. `ggsave()` is smart enough to know that we want to save it as a `jpg` from adding the extension `.jpg` to our filename.
 
@@ -502,7 +503,7 @@ our_plot +
 
 The other main use for `scale_` functions is to improve the formatting on the axis tick labels.
 
-Say our y axis was dollars instead of number of cigarettes. We can supply `label_dollar()` as an argument to our `labels` argument in scale\_y\_continuous:
+Say our y axis was dollars instead of number of cigarettes. We can supply `label_dollar()` as an argument to our `labels` argument in scale_y\_continuous:
 
 ```{r}
 our_plot +
@@ -515,7 +516,7 @@ Other useful label\_ functions for formatting labels:
 -   `label_scientific()` - lets you format the labels with scientific notation
 -   `label_pvalue()` - formatting specific to p-values
 
-## scale\_color\_manual() - mapping discrete colors to categories
+## scale_color_manual() - mapping discrete colors to categories
 
 If you want to customize the colors values in your data set are mapped to, you can use `scale_color_manual()`:
 
