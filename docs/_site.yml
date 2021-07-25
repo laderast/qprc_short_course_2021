@@ -2,7 +2,7 @@ name: "docs"
 title: "QPRC Short Course 2021"
 description: |
   QPRC Short Course 2021
-output_dir: "_site"
+output_dir: "."
 navbar:
   right:
     - text: "Home"
