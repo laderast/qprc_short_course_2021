@@ -15,6 +15,34 @@ site: distill::distill_website
 
 Please message Eric Leung if you do not have access to the project.
 
+# Learning Objectives
+
+## Part 1
+
+1.  **Import** spreadsheet-style data into R as a `data.frame`.
+2.  **Visualize** `numeric` vectors in this dataset using `ggplot2`
+3.  **Visualize** categorical/numeric variables as `boxplots`
+4.  **Customize** your plot using `theme()`
+5.  **Change** colors and breaks using `{scales}`
+
+## Part 2
+
+-   **List** 5 key `{dplyr}` verbs for data manipulation
+-   **Sort** a dataset by columns using `arrange()`
+-   **Select** columns from a dataset using `select()`
+-   **Learn** and apply `mutate()` to change the data type of a variable
+-   **Apply** `mutate()` to calculate a new variable based on other variables in a `data.frame`.
+-   **Apply** `case_when` in a `mutate()` statement to make a continuous variable categorical
+-   **Apply** `group_by()/summarize()` as a pattern to get summary statistics, including counts, means, and standard deviations within a category.
+-   **Standardize** variable names using `clean_names()`
+
+## Part 3
+
+- **Articulate** the different kinds of output formats in RMarkdown
+- **Utilize** YAML front matter to customize an RMarkdown report
+- **Utilize** parameters to make reusable reports
+- **Use** streams as data sources for an RMarkdown report 
+
 ## Intro Slides
 
 ```{r}

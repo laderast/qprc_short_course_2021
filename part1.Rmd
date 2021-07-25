@@ -18,6 +18,22 @@ library(readxl)
 
 Remember to save this notebook under a new name, such as `part1_laderas.Rmd`.
 
+## Quick Tour of RStudio
+
+[four parts]
+
+[console]
+
+[code window]
+
+[environment]
+
+[files]
+
+## Quick Tour of RMarkdown
+
+[Going to visual mode]
+
 # Learning Objectives
 
 By the end of this session, you should be able to:
@@ -202,7 +218,7 @@ Based on the `sugar` versus `rating` graph above, map the appropriate variables 
 
 What's missing compared to the graph above?
 
-```{r}
+```{r error=TRUE}
 ggplot(data = cereals) +
 
   aes(x = _____ ,
@@ -276,7 +292,9 @@ ggplot(data = cereals) +
 
 ```
 
-Now we've re-created the above plot! Let's save it using `ggsave()`. `ggsave()` saves the last created plot to a file. We'll save it as a `jpg` file. `ggsave()` is smart enough to know that we want to save it as a `jpg` from adding the extension `.jpg` to our filename.
+Now we've re-created the above plot! 
+
+Let's save it using `ggsave()`. `ggsave()` saves the last created plot to a file. We'll save it as a `jpg` file. `ggsave()` is smart enough to know that we want to save it as a `jpg` from adding the extension `.jpg` to our filename.
 
 ```{r}
 ggsave("sugar-plot.jpg")
@@ -395,7 +413,7 @@ Don't forget to look at the help documentation (e.g., `?facet_wrap`) to learn mo
 
 Facet the boxplot by `shelf`. Don't forget `vars()!`
 
-```{r}
+```{r error=TRUE}
 ggplot(cereals) +
   
   aes(x = mfr, 
@@ -473,7 +491,7 @@ c(2, 4, 6, 8, 10)
 
 Hint: it's not `scale_x_continuous`, but `scale_y_continuous`:
 
-```{r}
+```{r error=TRUE}
 our_plot +
   
     scale_y_continous()

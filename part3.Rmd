@@ -26,6 +26,11 @@ https://cran.r-project.org/web/packages/mvMonitoring/vignettes/MVSPC-Workflow.ht
 
 https://www.bupar.net/index.html
 
+## Streams as Data Sources
+
+
+
+
 ## Get Stock prices
 
 ```{r}
