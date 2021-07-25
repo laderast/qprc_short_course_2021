@@ -51,6 +51,9 @@ knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/#1"
 
 ## RMarkdown Slides
 
+```{r}
+knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/rmarkdown.html#1")
+```
 
 
 
