@@ -75,7 +75,7 @@ I want to normalize your own curiosity and fuel your desire to learn more.
 
 If you are disruptive to class learning or disparaging to other students, I may mute you for the day.
 
-.footnote[https://bit.ly/bdc_shiny_slides]
+.footnote[https://bit.ly/qpcr_sc]
 ---
 # Ted Laderas, PhD
 
@@ -91,6 +91,8 @@ If you are disruptive to class learning or disparaging to other students, I may 
 <img src="image/ted.jpg" width = 250>
 ]
 
+.footnote[https://bit.ly/qpcr_sc]
+
 ---
 # Workshop TA
 
@@ -100,12 +102,16 @@ If you are disruptive to class learning or disparaging to other students, I may 
     If you have any questions you don't want to ask me, you can message Eric privately.
 ]
 
+.footnote[https://bit.ly/qpcr_sc]
+
 ---
 # Introduce Yourself in Chat
 
 - Your Name
 - Affiliation
 - What you hope to learn in today's workshop
+
+.footnote[https://bit.ly/qpcr_sc]
 
 ---
 
@@ -119,6 +125,8 @@ If you are disruptive to class learning or disparaging to other students, I may 
 
 We will take short 5 minute breaks every 60 minutes regardless. We will also be doing exercises, so if you need to take a break, you can do so then.
 
+.footnote[https://bit.ly/qpcr_sc]
+
 ---
 
 # Breakout Rooms
@@ -128,16 +136,21 @@ We will take short 5 minute breaks every 60 minutes regardless. We will also be 
 - We will drop in during exercises (usually about 5 minutes long).
 - We will pick 1 breakout room to share results.
 
+.footnote[https://bit.ly/qpcr_sc]
+
 ---
+class: center, middle
 # Trying Breakout Rooms
 
+.footnote[https://bit.ly/qpcr_sc]
 
 ---
+class: center, middle
 # Tour of RStudio Cloud
 
 
 ---
-
+class: center, middle
 # Let's get started by opening up `part1.Rmd` in cloud
 
 

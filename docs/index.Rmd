@@ -45,15 +45,17 @@ Please message Eric Leung if you do not have access to the project.
 
 ## Intro Slides
 
+Open the introduction slides in a separate window: <a href="https://laderast.github.io/qprc_short_course_2021/slides/#1" target="_blank">https://laderast.github.io/qprc_short_course_2021/slides/#1</a>
+
 ```{r}
 knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/#1")
 ```
 
 ## RMarkdown Slides
 
+Open the Rmarkdown slides in a separate window: <a href="https://laderast.github.io/qprc_short_course_2021/slides/rmarkdown.html#1" target="_blank">https://laderast.github.io/qprc_short_course_2021/slides/rmarkdown.html#1</a>
+
 ```{r}
 knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/rmarkdown.html#1")
 ```
-
-
 
