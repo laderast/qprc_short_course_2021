@@ -65,52 +65,6 @@ We'll focus on the following verbs:
 -   `mutate()` - transforming variables in our data
 -   `%>%` - the pipe character, which lets us join our verbs together in a *pipeline*.
 
-## Sorting Data Frames using `arrange()`
-
-Ok, we already have encountered `arrange()`. It's a function that lets us sort a `data.frame` by a variable.
-
-By default, it sorts in *ascending* order:
-
-```{r}
-cereals %>% 
-  arrange(sugars)
-```
-
-To sort by descending order, you need to wrap the variable in the `desc()` function:
-
-```{r}
-cereals %>%
-  arrange(desc(sugars))
-```
-
-You can also arrange by multiple variables.
-
-```{r}
-smoke_complete %>%
-  arrange(desc(sugars),
-          fat)
-```
-
-Note that order of variables in `arrange()` matters!
-
-```{r}
-smoke_complete %>%
-  arrange(
-    fat,
-    desc(sugars)
-          )
-```
-
-### Challenge
-
-Use `arrange()` to sort by `rating` and by descending `sugars`.
-
-```{r}
-smoke_complete %>%
-  arrange(-----, desc(-----))
-```
-
-
 ## Introducing the pipe (`%>%`)
 
 Often times, we want to do multiple operations on our data and in a specific order.
@@ -210,6 +164,52 @@ ggplot(data=filtered_cereals) +
 
 The native pipe does have better performance overall. I haven't switched my code over yet.
 
+
+## Sorting Data Frames using `arrange()`
+
+Ok, let's look at `arrange()`. It's a function that lets us sort a `data.frame` by a variable.
+
+By default, it sorts in *ascending* order:
+
+```{r}
+cereals %>% 
+  arrange(sugars)
+```
+
+To sort by descending order, you need to wrap the variable in the `desc()` function:
+
+```{r}
+cereals %>%
+  arrange(desc(sugars))
+```
+
+You can also arrange by multiple variables.
+
+```{r}
+smoke_complete %>%
+  arrange(desc(sugars),
+          fat)
+```
+
+Note that order of variables in `arrange()` matters!
+
+```{r}
+smoke_complete %>%
+  arrange(
+    fat,
+    desc(sugars)
+          )
+```
+
+### Challenge
+
+Use `arrange()` to sort by `rating` and by descending `sugars`.
+
+```{r}
+smoke_complete %>%
+  arrange(-----, desc(-----))
+```
+
 ## Sorting Data Frames using `arrange()`
 
 Ok, we already have encountered `arrange()`. It's a function that lets us sort a `data.frame` by a variable.
@@ -247,7 +247,14 @@ smoke_complete %>%
 ```
 
 ### Challenge
->>>>>>> 3ab34a65802fae4b6df82e58efd63d52af565601
+
+Sort by `desc` fat, and then by `rating`
+
+```{r error = TRUE}
+cereals %>%
+  arrange(desc(---), -----)
+
+```
 
 ## `filter()`ing our data
 
