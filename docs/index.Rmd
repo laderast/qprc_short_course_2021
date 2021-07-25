@@ -15,10 +15,11 @@ site: distill::distill_website
 
 Please message Eric Leung if you do not have access to the project.
 
-
 ## Intro Slides
 
-
+```{r}
+knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/#1")
+```
 
 ## RMarkdown Slides
 
