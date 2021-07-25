@@ -1,0 +1,107 @@
+---
+title: "QPRC Short Course 2021"
+author: "Ted Laderas and Eric Leung"
+institute: "QPRC 2021"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+style_mono_accent(
+  base_color = "midnightblue",
+  header_font_google = google_font("Josefin Sans"),
+  link_color = "steelblue",
+  text_font_size = "24px",
+  footnote_font_size = "20px"
+)
+```
+
+```{r xaringanExtra, echo=FALSE}
+xaringanExtra::use_xaringan_extra(c("tile_view", "logo", "tachyons"))
+xaringanExtra::use_panelset()
+xaringanExtra::use_tachyons()
+```
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(flair)
+library(shiny)
+categoricalVars <- c("country", 
+                     "type_of_subject", 
+                     "subject_race", 
+                     "subject_sex")
+library(fivethirtyeight)
+library(ggplot2)
+library(plotly)
+data(biopics)
+```
+
+```{css, echo=FALSE}
+.tiny .remark-code { /*Change made here*/
+  font-size: 80% !important;
+}
+
+```
+
+class: center, middle
+# Welcome and Logistics
+
+---
+class: center, middle
+# Where are these slides?
+
+## http://bit.ly/qprc_site
+
+---
+# BioData Club Code of Conduct
+
+This workshop is governed by the [BioData Club Code of Conduct](https://biodata-club.github.io/code_of_conduct/).
+
+This workshop is meant to be a psychologically safe space where it's ok to ask questions.
+
+I want to normalize your own curiosity and fuel your desire to learn more.
+
+If you are disruptive to class learning or disparaging to other students, I may mute you for the day.
+
+.footnote[https://bit.ly/bdc_shiny_slides]
+---
+# Ted Laderas, PhD
+
+.pull-left[
+- Bioinformatics Trainer, DNAnexus
+- Certified RStudio/Carpentries Instructor
+- Co-founder of
+  - [BioData Club](http://biodata-club.github.io)
+  - [Cascadia-R Conference](https://cascadiarconf.com)
+- https://laderast.github.io 
+]
+.pull-right[
+<img src="image/ted.jpg" width = 250>
+]
+
+---
+# Workshop TA
+
+- Eric Leung
+
+.bg-washed-green.b--dark-green.ba.bw2.br3.shadow-5.ph4.mt5[
+    If you have any questions you don't want to ask me, you can message Eric privately.
+]
+
+---
+# Introduce Yourself in Chat
+
+- Your Name
+- Affiliation
+- What you hope to learn in today's workshop
+
+---

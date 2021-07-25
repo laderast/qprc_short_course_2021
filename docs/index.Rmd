@@ -1,0 +1,13 @@
+---
+title: "QPRC Short Course 2021"
+author: Ted Laderas
+description: |
+  Welcome to the website. I hope you enjoy it!
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
