@@ -240,9 +240,6 @@ smoke_complete %>%
           )
 ```
 
-### Challenge
->>>>>>> 3ab34a65802fae4b6df82e58efd63d52af565601
-
 ## `filter()`ing our data
 
 ```{r}
