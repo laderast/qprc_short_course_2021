@@ -17,6 +17,7 @@ Make sure to set the code window to visual mode and to save a copy of this under
 
 -   **List** 5 key `{dplyr}` verbs for data manipulation
 -   **Sort** a dataset by columns using `arrange()`
+-   **Utilize** the pipe (`%>%`) to chain `{dplyr}` verbs together.
 -   **Select** columns from a dataset using `select()`
 -   **Learn** and apply `mutate()` to change the data type of a variable
 -   **Apply** `mutate()` to calculate a new variable based on other variables in a `data.frame`.
@@ -32,7 +33,7 @@ library(tidyverse)
 library(readxl)
 library(janitor)
 
-cereals <- read_excel("data/cereals.xlsx", 
+cereals <- read_excel("data/cereal.xlsx", 
                              sheet=1, 
                              na="NA")
 ```
@@ -188,6 +189,59 @@ ggplot(data=filtered_cereals) +
   geom_histogram()
 ```
 
+## A Note on the new R-native pipe (`|>`)
+
+The pipe we've been using is part of the `{magrittr}` package. As of R 4.0, there is a new pipe that is native to R, which uses the `|>` characters instead of `%>%`:
+
+```{r}
+filtered_cereals <- cereals |>
+  filter(mfr == "N")
+
+ggplot(data=filtered_cereals) +
+  aes(x = fat) +
+  geom_histogram()
+```
+
+The native pipe does have better performance overall. I haven't switched my code over yet.
+
+## Sorting Data Frames using `arrange()`
+
+Ok, we already have encountered `arrange()`. It's a function that lets us sort a `data.frame` by a variable.
+
+By default, it sorts in *ascending* order:
+
+```{r}
+cereals %>% 
+  arrange(sugars)
+```
+
+To sort by descending order, you need to wrap the variable in the `desc()` function:
+
+```{r}
+cereals %>%
+  arrange(desc(sugars))
+```
+
+You can also arrange by multiple variables.
+
+```{r}
+smoke_complete %>%
+  arrange(desc(sugars),
+          fat)
+```
+
+Note that order of variables in `arrange()` matters!
+
+```{r}
+smoke_complete %>%
+  arrange(
+    fat,
+    desc(sugars)
+          )
+```
+
+### Challenge
+>>>>>>> 3ab34a65802fae4b6df82e58efd63d52af565601
 
 ## `filter()`ing our data
 
