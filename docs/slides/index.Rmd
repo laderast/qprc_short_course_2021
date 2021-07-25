@@ -105,3 +105,37 @@ If you are disruptive to class learning or disparaging to other students, I may 
 - What you hope to learn in today's workshop
 
 ---
+
+# Rough Breakdown of Today
+
+- 9 - 11:30 AM: Part 1 (ggplot2)/Start Part 2 (dplyr)
+- 11:30 - 12:30 PM: Lunch Break
+- 12:30 - 2:30 PM: Part 2 (dplyr)
+- 2:30 - 3 PM: Break
+- 3 - 5 PM: Part 2 / Part 3 (RMarkdown)
+
+We will take short 5 minute breaks every 60 minutes regardless. We will also be doing exercises, so if you need to take a break, you can do so then.
+
+---
+
+# Breakout Rooms
+
+- It's dangerous to learn alone!
+- We will assign breakout rooms of 5 students to work together. 
+- We will drop in during exercises (usually about 5 minutes long).
+- We will pick 1 breakout room to share results.
+
+---
+# Trying Breakout Rooms
+
+
+---
+# Tour of RStudio Cloud
+
+
+---
+
+# Let's get started by opening up `part1.Rmd` in cloud
+
+
+

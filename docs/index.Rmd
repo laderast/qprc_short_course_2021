@@ -2,7 +2,7 @@
 title: "QPRC Short Course 2021"
 author: Ted Laderas
 description: |
-  Welcome to the website. I hope you enjoy it!
+  Website for the QPRC Short Course on the Tidyverse
 site: distill::distill_website
 ---
 
@@ -10,4 +10,18 @@ site: distill::distill_website
 knitr::opts_chunk$set(echo = FALSE)
 
 ```
+
+## RStudio Workspace
+
+Please message Eric Leung if you do not have access to the project.
+
+
+## Intro Slides
+
+
+
+## RMarkdown Slides
+
+
+
 
