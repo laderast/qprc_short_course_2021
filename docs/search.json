@@ -1,0 +1,30 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this site",
+      "description": "Some additional details about the website",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n",
+      "last_modified": "2021-07-25T12:46:33-07:00"
+    },
+    {
+      "path": "index.html",
+      "title": "QPRC Short Course 2021",
+      "description": "Website for the QPRC Short Course on the Tidyverse\n",
+      "author": [
+        {
+          "name": {},
+          "url": "https://laderast.github.io"
+        },
+        {
+          "name": {},
+          "url": "https://erictleung.com/"
+        }
+      ],
+      "contents": "\r\n\r\nContents\r\nRStudio Workspace\r\nLearning Objectives\r\nPart 1\r\nPart 2\r\nPart 3\r\nIntro Slides\r\nRMarkdown Slides\r\n\r\n\r\nRStudio Workspace\r\nPlease message Eric Leung if you do not have access to the project.\r\nLearning Objectives\r\nPart 1\r\nImport spreadsheet-style data into R as a data.frame.\r\nVisualize numeric vectors in this dataset using ggplot2\r\nVisualize categorical/numeric variables as boxplots\r\nCustomize your plot using theme()\r\nChange colors and breaks using {scales}\r\nPart 2\r\nList 5 key {dplyr} verbs for data manipulation\r\nSort a dataset by columns using arrange()\r\nSelect columns from a dataset using select()\r\nLearn and apply mutate() to change the data type of a variable\r\nApply mutate() to calculate a new variable based on other variables in a data.frame.\r\nApply case_when in a mutate() statement to make a continuous variable categorical\r\nApply group_by()/summarize() as a pattern to get summary statistics, including counts, means, and standard deviations within a category.\r\nStandardize variable names using clean_names()\r\nPart 3\r\nArticulate the different kinds of output formats in RMarkdown\r\nUtilize YAML front matter to customize an RMarkdown report\r\nUtilize parameters to make reusable reports\r\nUse streams as data sources for an RMarkdown report\r\nIntro Slides\r\nOpen the introduction slides in a separate window: https://laderast.github.io/qprc_short_course_2021/slides/#1\r\n\r\n\r\nknitr::include_url(\"https://laderast.github.io/qprc_short_course_2021/slides/#1\")\r\n\r\n\r\n\r\n\r\n\r\nRMarkdown Slides\r\nOpen the Rmarkdown slides in a separate window: https://laderast.github.io/qprc_short_course_2021/slides/rmarkdown.html#1\r\n\r\n\r\nknitr::include_url(\"https://laderast.github.io/qprc_short_course_2021/slides/rmarkdown.html#1\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2021-07-25T13:47:10-07:00"
+    }
+  ],
+  "collections": []
+}

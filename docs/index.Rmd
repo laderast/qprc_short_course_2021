@@ -1,9 +1,20 @@
 ---
 title: "QPRC Short Course 2021"
-author: Ted Laderas
+author:
+  - first_name: "Ted"
+    last_name: "Laderas"
+    url: https://laderast.github.io
+    affiliation: DNAnexus
+  - first_name: "Eric"
+    last_name: "Leung"
+    url: https://erictleung.com/
 description: |
   Website for the QPRC Short Course on the Tidyverse
 site: distill::distill_website
+output: 
+  distill::distill_article:
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +24,7 @@ site: distill::distill_website
 
 ## RStudio Workspace
 
-Please message Eric Leung if you do not have access to the project.
+Please message Eric Leung if you do not have access to the Rstudio.cloud project.
 
 # Learning Objectives
 
@@ -42,6 +53,8 @@ Please message Eric Leung if you do not have access to the project.
 - **Utilize** YAML front matter to customize an RMarkdown report
 - **Utilize** parameters to make reusable reports
 - **Use** streams as data sources for an RMarkdown report 
+
+# Slides
 
 ## Intro Slides
 
