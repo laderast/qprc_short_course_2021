@@ -34,6 +34,12 @@ cereals <- read_excel("data/cereal.xlsx",
                              na="NA")
 ```
 
+# Before we get started
+
+I want to point you to the dplyr cheatsheet: <https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf>
+
+This is probably the most useful reference to `{dplyr}` that you will need for the time being.
+
 # Data Manipulation using `dplyr`
 
 ```{r}
