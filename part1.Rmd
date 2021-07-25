@@ -446,6 +446,20 @@ our_boxplot <- ggplot(cereals) +
 our_boxplot
 ```
 
+# Final Assignment: Be Creative
+
+Assess the relationship between two variables in the dataset using a plot.
+
+```{r}
+ggplot(cereals) +
+  aes() +
+  geom_()
+
+```
+
+
+# Optional (if we get this far)
+
 ## Scales
 
 Scales are added to a ggplot for multiple reasons:
@@ -528,7 +542,7 @@ our_plot +
 
 ## Color Palettes: `{wesanderson}`
 
-If you don't want to meticulously control every color, you can use palettes as a starting point for your
+If you don't want to meticulously control every color, you can use palettes as a starting point for your visualizations:
 
 ```{r}
 library(wesanderson)
