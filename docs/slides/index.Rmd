@@ -1,5 +1,6 @@
 ---
-title: "QPRC Short Course 2021"
+title: "Visualize, Wrangle, Present" 
+subtitle: "Work Effectively with the Tidyverse and RMarkdown"
 author: "Ted Laderas and Eric Leung"
 institute: "QPRC 2021"
 date: "`r Sys.Date()`"
@@ -53,13 +54,15 @@ data(biopics)
 ```
 
 class: center, middle
+
 # Welcome and Logistics
 
 ---
 class: center, middle
+
 # Where are these slides?
 
-## http://bit.ly/qprc_site
+## https://bit.ly/qpcr_sc
 
 ---
 # BioData Club Code of Conduct
