@@ -457,7 +457,6 @@ ggplot(cereals) +
 
 ```
 
-
 # Optional (if we get this far)
 
 ## Scales

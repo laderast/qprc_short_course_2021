@@ -38,6 +38,12 @@ cereals <- read_excel("data/cereal.xlsx",
                              na="NA")
 ```
 
+# Before we get started
+
+I want to point you to the dplyr cheatsheet: <https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf>
+
+This is probably the most useful reference to `{dplyr}` that you will need for the time being.
+
 # Data Manipulation using `dplyr`
 
 ```{r}
@@ -58,52 +64,6 @@ We'll focus on the following verbs:
 -   `group_by()/summarize()` - summarizing our data.frame, such as counting and computing means
 -   `mutate()` - transforming variables in our data
 -   `%>%` - the pipe character, which lets us join our verbs together in a *pipeline*.
-
-## Sorting Data Frames using `arrange()`
-
-Ok, we already have encountered `arrange()`. It's a function that lets us sort a `data.frame` by a variable.
-
-By default, it sorts in *ascending* order:
-
-```{r}
-cereals %>% 
-  arrange(sugars)
-```
-
-To sort by descending order, you need to wrap the variable in the `desc()` function:
-
-```{r}
-cereals %>%
-  arrange(desc(sugars))
-```
-
-You can also arrange by multiple variables.
-
-```{r}
-smoke_complete %>%
-  arrange(desc(sugars),
-          fat)
-```
-
-Note that order of variables in `arrange()` matters!
-
-```{r}
-smoke_complete %>%
-  arrange(
-    fat,
-    desc(sugars)
-          )
-```
-
-### Challenge
-
-Use `arrange()` to sort by `rating` and by descending `sugars`.
-
-```{r}
-smoke_complete %>%
-  arrange(-----, desc(-----))
-```
-
 
 ## Introducing the pipe (`%>%`)
 
@@ -204,9 +164,10 @@ ggplot(data=filtered_cereals) +
 
 The native pipe does have better performance overall. I haven't switched my code over yet.
 
+
 ## Sorting Data Frames using `arrange()`
 
-Ok, we already have encountered `arrange()`. It's a function that lets us sort a `data.frame` by a variable.
+Ok, let's look at `arrange()`. It's a function that lets us sort a `data.frame` by a variable.
 
 By default, it sorts in *ascending* order:
 
@@ -238,6 +199,15 @@ smoke_complete %>%
     fat,
     desc(sugars)
           )
+```
+
+### Challenge
+
+Use `arrange()` to sort by `rating` and by descending `sugars`.
+
+```{r}
+smoke_complete %>%
+  arrange(-----, desc(-----))
 ```
 
 ## `filter()`ing our data
@@ -321,7 +291,7 @@ cereals %>%
 
 Use `filter()` to select cereals who have
 
-mfr == "C" and
+mfr == "C" **and**
 
 who have less than 100 mg sodium.
 

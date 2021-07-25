@@ -44,6 +44,12 @@ Open the introduction slides in a separate window: <a href="https://laderast.git
 knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/#1")
 ```
 
+## Further Resources
+
+- [`{ggplot2}` cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+
+
+
 # Part 2
 
 ## Learning Objectives
@@ -56,6 +62,11 @@ knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/#1"
 -   **Apply** `case_when` in a `mutate()` statement to make a continuous variable categorical
 -   **Apply** `group_by()/summarize()` as a pattern to get summary statistics, including counts, means, and standard deviations within a category.
 -   **Standardize** variable names using `clean_names()`
+
+## Further Resources
+
+- [`{dplyr}` cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
+- [`{tidyowl}` learnR tutorials](https://github.com/laderast/tidyowl)
 
 # Part 3
 
@@ -74,3 +85,8 @@ Open the Rmarkdown slides in a separate window: <a href="https://laderast.github
 knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/rmarkdown.html#1")
 ```
 
+## Further Resources
+
+```{r}
+knitr::include_url("https://slides.djnavarro.net/starting-rmarkdown/#1")
+```
