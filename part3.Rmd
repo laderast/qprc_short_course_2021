@@ -1,8 +1,11 @@
 ---
 title: 'Part 3: Parametrized Reporting with RMarkdown and friends'
 author: "Ted Laderas"
-date: "7/5/2021"
+date: "`r Sys.Date()`"
 output: html_document
+#output: word_document
+#output: slidy_presentation
+#output: distill::distill_article()
 params: 
   date: !r Sys.Date()
 ---
@@ -14,6 +17,7 @@ library(ggplot2)
 library(tidyquant)
 library(magrittr)
 library(broom)
+library(dplyr)
 ```
 
 ##
