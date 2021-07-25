@@ -9,6 +9,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Before You Get Started
+
+Make sure to set the code window to visual mode and to save a copy of this under your own name.
+
 # Learning Objectives
 
 -   **List** 5 key `{dplyr}` verbs for data manipulation
@@ -61,17 +65,63 @@ We'll focus on the following verbs:
 -   `mutate()` - transforming variables in our data
 -   `%>%` - the pipe character, which lets us join our verbs together in a *pipeline*.
 
+## Sorting Data Frames using `arrange()`
+
+Ok, we already have encountered `arrange()`. It's a function that lets us sort a `data.frame` by a variable.
+
+By default, it sorts in *ascending* order:
+
+```{r}
+cereals %>% 
+  arrange(sugars)
+```
+
+To sort by descending order, you need to wrap the variable in the `desc()` function:
+
+```{r}
+cereals %>%
+  arrange(desc(sugars))
+```
+
+You can also arrange by multiple variables.
+
+```{r}
+smoke_complete %>%
+  arrange(desc(sugars),
+          fat)
+```
+
+Note that order of variables in `arrange()` matters!
+
+```{r}
+smoke_complete %>%
+  arrange(
+    fat,
+    desc(sugars)
+          )
+```
+
+### Challenge
+
+Use `arrange()` to sort by `rating` and by descending `sugars`.
+
+```{r}
+smoke_complete %>%
+  arrange(-----, desc(-----))
+```
+
+
 ## Introducing the pipe (`%>%`)
 
 Often times, we want to do multiple operations on our data and in a specific order.
 
 For example, I might want to do the following:
 
-*Take* my dataset `cereals` **and then**
+-   *Take* my dataset `cereals` **and then**
 
-*Sort* it by `fat` **and then**
+-   *Sort* it by `fat` **and then**
 
-*filter* to have only cereals from Nabisco from the data.
+-   *filter* to have only cereals from Nabisco from the data.
 
 The pipe (`%>%`) function acts like the **and then**:
 
@@ -197,15 +247,13 @@ smoke_complete %>%
 ```
 
 ### Challenge
-
-Use `arrange()` to sort by `rating` and by descending `sugars`.
-
-```{r}
-smoke_complete %>%
-  arrange(-----, desc(-----))
-```
+>>>>>>> 3ab34a65802fae4b6df82e58efd63d52af565601
 
 ## `filter()`ing our data
+
+```{r}
+knitr::include_graphics("image/filter.png")
+```
 
 `filter()` is an extremely powerful function. It lets us subset our data according to specific criteria.
 
@@ -302,6 +350,10 @@ knitr::include_graphics("image/dplyr_mutate.png")
 ```
 
 So what is mutate? `mutate()` is one of the most useful `dplyr` verbs. You can use it to transform data (variables in your `data.frame`) and add it as a new variable into the data.frame.
+
+```{r}
+knitr::include_graphics("image/mutate.png")
+```
 
 I tend to think of this much like adding a formula in Excel to calculate the value of a new column based on previous columns. You can do lots of things such as:
 
@@ -442,6 +494,10 @@ cereals %>%
 
 # `summarize()`
 
+```{r}
+knitr::include_graphics("image/summarize.png")
+```
+
 The `summarize()` verb produces summaries across your data.
 
 For example, if I wanted to find the average `cigarettes_per_day` across all my data, I'd do this:
@@ -475,6 +531,10 @@ Useful functions (from <https://dplyr.tidyverse.org/reference/summarise.html>)
 By itself, `summarize()` is ok. But it's really combined with `group_by()` that it becomes extremely powerful.
 
 # `group_by()/summarize()`
+
+```{r}
+knitr::include_graphics("image/group_by.png")
+```
 
 These two verbs always go together. `group_by()` doesn't do anything by itself, output wise. But what it does is split our data frame into a number of smaller `data.frame`s split out by category. Then we use `summarize` to do some sort of summary calculation (such as counting or calculating the mean) on these smaller `data.frame`s:
 
@@ -569,6 +629,10 @@ cereal_good_colnames %>%
 
 ## Selecting columns using `select()`
 
+```{r}
+knitr::include_graphics("image/select.png")
+```
+
 The final verb we'll look at is `select()`. It allows us to select variables from our dataset:
 
 ```{r}
@@ -608,7 +672,7 @@ write_excel_csv(x = processed_data,
 
 # Final Assignment: Be Creative
 
-Ask a question of the `cereals` dataset that you can use group_by/summarize about, or plot the relationship between two variables.
+Ask a question of the `cereals` dataset that you can use `group\_by`/`summarize` about, use `filter` on, or plot the relationship between two variables.
 
 Share your code with others in your breakout room. What did they find about the `cereals` data?
 

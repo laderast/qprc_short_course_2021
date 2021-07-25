@@ -4,7 +4,7 @@ author:
   - first_name: "Ted"
     last_name: "Laderas"
     url: https://laderast.github.io
-    affiliation: DNAnexus
+    affiliation: Principal Scientist and Bioinformatics Trainer, DNAnexus
   - first_name: "Eric"
     last_name: "Leung"
     url: https://erictleung.com/
@@ -24,11 +24,11 @@ output:
 
 ## RStudio Workspace
 
-Please message Eric Leung if you do not have access to the Rstudio.cloud project.
+Please message Eric Leung in Zoom if you do not have access to the Rstudio.cloud project.
 
-# Learning Objectives
+# Part 1
 
-## Part 1
+## Learning Objectives
 
 1.  **Import** spreadsheet-style data into R as a `data.frame`.
 2.  **Visualize** `numeric` vectors in this dataset using `ggplot2`
@@ -36,7 +36,17 @@ Please message Eric Leung if you do not have access to the Rstudio.cloud project
 4.  **Customize** your plot using `theme()`
 5.  **Change** colors and breaks using `{scales}`
 
-## Part 2
+## Slides
+
+Open the introduction slides in a separate window: <a href="https://laderast.github.io/qprc_short_course_2021/slides/#1" target="_blank">https://laderast.github.io/qprc_short_course_2021/slides/#1</a>
+
+```{r}
+knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/#1")
+```
+
+# Part 2
+
+## Learning Objectives
 
 -   **List** 5 key `{dplyr}` verbs for data manipulation
 -   **Sort** a dataset by columns using `arrange()`
@@ -47,22 +57,14 @@ Please message Eric Leung if you do not have access to the Rstudio.cloud project
 -   **Apply** `group_by()/summarize()` as a pattern to get summary statistics, including counts, means, and standard deviations within a category.
 -   **Standardize** variable names using `clean_names()`
 
-## Part 3
+# Part 3
+
+## Learning Objectives
 
 - **Articulate** the different kinds of output formats in RMarkdown
 - **Utilize** YAML front matter to customize an RMarkdown report
 - **Utilize** parameters to make reusable reports
 - **Use** streams as data sources for an RMarkdown report 
-
-# Slides
-
-## Intro Slides
-
-Open the introduction slides in a separate window: <a href="https://laderast.github.io/qprc_short_course_2021/slides/#1" target="_blank">https://laderast.github.io/qprc_short_course_2021/slides/#1</a>
-
-```{r}
-knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/#1")
-```
 
 ## RMarkdown Slides
 
