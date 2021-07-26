@@ -1,12 +1,12 @@
 ---
 title: "Part 1: Visualizing data with ggplot2"
 author: "You!"
+date: "7/26/2021"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(vembedr)
 library(tidyverse)
 library(readxl)
 
@@ -52,7 +52,7 @@ It is set up as a *library* - functions someone else wrote that are not built in
 
 The Tidyverse is essentially a library of libraries -- each of these libraries contains functions that are either essential for or *greatly* simplify the process of data manipulation and visualization for data scientists.
 
-We have already installed the `tidyverse` for you in Rstudio.cloud. For reading excel files, we also need to load up an additional library called `readxl`.
+We have already installed the `tidyverse` for you in RStudio Cloud. For reading Excel files, we also need to load up an additional library called `readxl`.
 
 ```{r warning=F, message=FALSE}
 #load the required libraries
@@ -67,11 +67,11 @@ library(readxl)
 knitr::include_graphics("image/project2.JPG")
 ```
 
-Once you have your notebook open, let's talk about its location. It is located where the `project.rproj` file. The location of this file (also called an "RProject" file) is always considered the `root` directory of the project.
+Once you have your notebook open, let's talk about its location. It is located where the `project.rproj` file is. The location of this file (also called an "RProject" file) is always considered the `root` directory of the project.
 
 It's where you start from that determines the file directory path for loading data.
 
-Since this notebook, `part1.Rmd` is in the same folder as the `project.rproj` file, then when we need to refer to data files, it is *relative* to the root folder.
+Since this notebook, `part1.Rmd`, is in the same folder as the `project.rproj` file, then when we need to refer to data files, it is *relative* to the root folder.
 
 When you're starting out, it's best to keep your RMarkdown notebooks and files in the **root** folder. It will help prevent you from dealing with a lot of headaches.
 
@@ -83,14 +83,14 @@ In our notebook, how do we refer to that file name? Since we're in the root, we 
 
 `data/cereal.xlsx`
 
-## Loading our excel file
+## Loading our Excel file
 
 Now we can use a built-in function called `read_excel()` that will help us load our data into R:
 
 ```{r}
 cereals <- read_excel("data/cereal.xlsx",
-                     sheet = 1,
-                     na = "NA")
+                      sheet = 1,
+                      na = "NA")
 ```
 
 You should see `cereals` appear in the Environment window on the upper right panel in RStudio. If you click on `cereals` there, a new tab will appear next to your R script in the Source window.
@@ -107,9 +107,9 @@ Fields in the dataset:
 
 -   `mfr`: Manufacturer of cereal
 
-    -   A = American Home Food Products;
+    -   A = American Home Food Products
     -   G = General Mills
-    -   K = Kelloggs
+    -   K = Kellogg's
     -   N = Nabisco
     -   P = Post
     -   Q = Quaker Oats
@@ -148,7 +148,7 @@ Fields in the dataset:
 
 ## Introducing `ggplot2`
 
-Click the button below to load up the graphic.
+Click the right arrow button below to load up the graphic.
 
 ```{r}
 knitr::include_graphics("image/ggplot2_exploratory.png")
@@ -196,7 +196,7 @@ In code, this is translated as:
     ggplot(data = cereals) +   
 
 
-    # make the mapping
+    # make the mapping to aesthetic attributes
     # map the x-axis to sugar
     # map the y-axis to rating
 
@@ -242,7 +242,7 @@ ggplot(data = cereals) +
 
 We can also map a `character` variable to our graph to color.
 
-Try mapping `mfr` to `color`.
+Try mapping the manufacturer of cereal, `mfr`, to `color`.
 
 ```{r}
 ggplot(data = cereals) +
@@ -320,7 +320,7 @@ our_plot <- ggplot(data = cereals) +
   ylab("Days to Follow Up")
 ```
 
-# Changing visual properties using built in themes
+# Changing visual properties using built-in themes
 
 ```{r}
 our_plot +
@@ -407,11 +407,11 @@ our_boxplot +
 
 Don't try to facet on a `numeric` variable - it won't work.
 
-Don't forget to look at the help documentation (e.g., `?facet_wrap`) to learn more about additional ways to customize your plots!
+Don't forget to look at the help documentation (e.g., typing into the console `?facet_wrap`) to learn more about additional ways to customize your plots!
 
 ### Challenge
 
-Facet the boxplot by `shelf`. Don't forget `vars()!`
+Facet the boxplot by `shelf`. Don't forget `vars()`!
 
 ```{r error=TRUE}
 ggplot(cereals) +
@@ -428,9 +428,9 @@ ggplot(cereals) +
 
 ## `geom`s are layers on your plot
 
-The really neat thing about `geom`s are that they can be layered onto your plot.
+The really neat thing about `geom`s are that they can be layered onto your plot, one geom after another.
 
-Here we're layering another geom, `geom_violin()` on `geom_boxplot()`.
+Here we're layering another geom, `geom_violin()`, on `geom_boxplot()`.
 
 We're providing a couple of values to `geom_violin()`:
 
@@ -465,7 +465,7 @@ Scales are added to a ggplot for multiple reasons:
 
 -   Transform numerical axes (such as change a plot to a log scale)
 -   Change the breaks (tick values) in a plot
--   Format values in a scale (such as dollars: "\$500", "600")
+-   Format values in a scale (such as dollars: "\$500", "\$600")
 -   Map discrete values to particular colors (make "LUSC" = "blue")
 
 All scale functions begin with `scale_` and are followed by the `aesthetic` it's working on, and the `transformation` of the data.
@@ -476,7 +476,7 @@ For example:
 
 One main use for `scale_` functions is to modify the *breaks* (the tick values along an axis):
 
-Here we're providing `scale_x_continuous()` an argument called `breaks`, which is a numeric vector that specifies the values we want each tick to be at:
+Here, we're providing `scale_x_continuous()` an argument called `breaks`, which is a numeric vector that specifies the values we want each tick to be at:
 
 ```{r}
 our_plot <- ggplot(cereals) +
@@ -515,68 +515,28 @@ our_plot +
 
 The other main use for `scale_` functions is to improve the formatting on the axis tick labels.
 
-Say our y axis was dollars instead of number of cigarettes. We can supply `label_dollar()` as an argument to our `labels` argument in scale_y\_continuous:
+Say our y-axis was dollars instead of rating. We can supply `label_dollar()` as an argument to our `labels` argument in `scale_y_continuous`:
 
 ```{r}
 our_plot +
     scale_y_continuous(labels = scales::label_dollar())
 ```
 
-Other useful label\_ functions for formatting labels:
+Other useful `label_` functions for formatting labels:
 
--   `label_date()` - Lets you control the way dates are formatted on the axis
+-   `label_date()` - lets you control the way dates are formatted on the axis
 -   `label_scientific()` - lets you format the labels with scientific notation
 -   `label_pvalue()` - formatting specific to p-values
 
 ## scale_color_manual() - mapping discrete colors to categories
 
-If you want to customize the colors values in your data set are mapped to, you can use `scale_color_manual()`:
+If you want to customize the colors values in your data set that are mapped to, you can use `scale_color_manual()`:
 
 ```{r}
 our_plot +
     scale_color_manual(values = c("C" = "limegreen", 
                                   "H" = "orange"))
 
-```
-
-## Color Palettes: `{wesanderson}`
-
-If you don't want to meticulously control every color, you can use palettes as a starting point for your visualizations:
-
-```{r}
-library(wesanderson)
-
-names(wes_palettes)
-```
-
-```{r}
-wes_palette("IsleofDogs1")
-```
-
-[to fix]
-
-```{r}
-our_plot +
-    scale_color_manual(values = wes_palette("IsleofDogs1"))
-
-```
-
-Remember, if we want to do this with `our_boxplot`, the scale we want to manipulate is not `color`, but `fill`, so we need to use `scale_fill_manual()`
-
-```{r}
-our_boxplot +
-    scale_fill_manual(values = wes_palette("IsleofDogs1"))
-
-```
-
-### Your Turn
-
-Pick one of the palettes from `wesanderson` and use it to modify `our_plot`:
-
-```{r}
-
-our_plot +
-    scale_color_manual(values = __________)
 ```
 
 ## `scale_color_gradient()`
@@ -593,19 +553,19 @@ ggplot(cereals) +
   geom_point(alpha = 0.5) +
   
   labs(title = "Sugar (grams)",
-       x = "Age at Diagnosis",
-       y = "Cigarettes Smoked per Day") +
+       x = "fat (g)",
+       y = "rating") +
   
-  scale_color_gradient(low = "black", high="blue")
+  scale_color_gradient(low = "black", high = "blue")
 
 
 ```
 
 ## Color Palettes: `{viridisLite}`
 
-One really important package to know about is `{viridisLite}`, which contains a number of color-blind friendly palettes.
+One really important package to know about is `{viridisLite}`, which contains a number of color-blind friendly palettes (<https://sjmgarnier.github.io/viridisLite/>).
 
-They have built in functions that use these:
+They have built-in functions that use these:
 
 For discrete values:
 
@@ -633,4 +593,9 @@ The `{paleteer}` package has a lot of other palettes:
 
 ## Further learning
 
-If you are interested in learning more about ggplot: - Documentation for all `ggplot` features is available [here](https://ggplot2.tidyverse.org). - RStudio also publishes a [ggplot cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) that is really handy! - [Customizing ggplot2 Cheatsheet](http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/) is also handy, because it organizes ggplot2 commands by task.
+If you are interested in learning more about ggplot2:
+
+\- Documentation for all `ggplot` features is available [here](https://ggplot2.tidyverse.org).\
+- RStudio also publishes a [ggplot2 cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) that is really handy!\
+- [Customizing ggplot2 Cheatsheet](http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/) is also handy, because it organizes ggplot2 commands by task.\
+- The official ggplot2 book <https://ggplot2-book.org/>

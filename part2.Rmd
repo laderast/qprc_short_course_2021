@@ -1,7 +1,7 @@
 ---
 title: 'Part 2: Summarizing, transforming, and cleaning data using `dplyr`'
 author: "You!"
-date: "7/5/2021"
+date: "7/26/2021"
 output: html_document
 ---
 
@@ -11,18 +11,18 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Before You Get Started
 
-Make sure to set the code window to visual mode and to save a copy of this under your own name.
+Make sure to set the code window to visual mode and to save a copy of this file under your own name.
 
 # Learning Objectives
 
 -   **List** 5 key `{dplyr}` verbs for data manipulation
 -   **Sort** a dataset by columns using `arrange()`
--   **Utilize** the pipe (`%>%`) to chain `{dplyr}` verbs together.
+-   **Utilize** the pipe (`%>%`) to chain `{dplyr}` verbs together
 -   **Select** columns from a dataset using `select()`
 -   **Learn** and apply `mutate()` to change the data type of a variable
--   **Apply** `mutate()` to calculate a new variable based on other variables in a `data.frame`.
+-   **Apply** `mutate()` to calculate a new variable based on other variables in a `data.frame`
 -   **Apply** `case_when` in a `mutate()` statement to make a continuous variable categorical
--   **Apply** `group_by()/summarize()` as a pattern to get summary statistics, including counts, means, and standard deviations within a category.
+-   **Apply** `group_by()/summarize()` as a pattern to get summary statistics, including counts, means, and standard deviations within a category
 -   **Standardize** variable names using `clean_names()`
 
 ## Getting Set up
@@ -34,8 +34,8 @@ library(readxl)
 library(janitor)
 
 cereals <- read_excel("data/cereal.xlsx", 
-                             sheet=1, 
-                             na="NA")
+                      sheet = 1, 
+                      na = "NA")
 ```
 
 # Before we get started
@@ -83,10 +83,10 @@ The pipe (`%>%`) function acts like the **and then**:
 # Take my dataset smoke complete **and then**
 cereals %>%
   
-#sort it by cigarettes_per day **and then**
+# sort it by grams of fat **and then**
   arrange(fat) %>%
 
-#filter it to only have cereals manufactured by Nabisco
+# filter it to only have cereals manufactured by Nabisco
   filter(mfr == "N")
 
 ```
@@ -136,7 +136,7 @@ This is a good way to work. By building each step and verifying that the output 
 
 ## The difference between `+` and `%>%`
 
-Remember that `+` is for `ggplot2` and that `%>%` is for `dplyr`. To keep them distinct and avoid confusion, separate our your data processing and your plotting.
+Remember that `+` is for `ggplot2` and that `%>%` is for `dplyr`. To keep them distinct and avoid confusion, separate your data processing from your plotting.
 
 You can chain them, but I always find that I get confused when I go back and alter the code.
 
@@ -144,16 +144,17 @@ You can chain them, but I always find that I get confused when I go back and alt
 filtered_cereals <- cereals %>%
   filter(mfr == "N")
 
-ggplot(data=filtered_cereals) +
+ggplot(data = filtered_cereals) +
   aes(x = fat) +
   geom_histogram()
 ```
 
 ## A Note on the new R-native pipe (`|>`)
 
-The pipe we've been using is part of the `{magrittr}` package. As of R 4.0, there is a new pipe that is native to R, which uses the `|>` characters instead of `%>%`:
+The pipe we've been using is part of the `{magrittr}` package that is automatically loaded with `{tidyverse}`. As of R 4.0, there is a new pipe that is native to R, which uses the `|>` characters instead of `%>%`:
 
 ```{r}
+# Similar to the previous code block with the pipe changed
 filtered_cereals <- cereals |>
   filter(mfr == "N")
 
@@ -163,7 +164,6 @@ ggplot(data=filtered_cereals) +
 ```
 
 The native pipe does have better performance overall. I haven't switched my code over yet.
-
 
 ## Sorting Data Frames using `arrange()`
 
@@ -176,7 +176,7 @@ cereals %>%
   arrange(sugars)
 ```
 
-To sort by descending order, you need to wrap the variable in the `desc()` function:
+To sort by *descending* order, you need to wrap the variable in the `desc()` function:
 
 ```{r}
 cereals %>%
@@ -191,14 +191,14 @@ smoke_complete %>%
           fat)
 ```
 
-Note that order of variables in `arrange()` matters!
+Note that the order of variables in `arrange()` matters!
 
 ```{r}
 smoke_complete %>%
   arrange(
     fat,
     desc(sugars)
-          )
+  )
 ```
 
 ### Challenge
@@ -218,12 +218,11 @@ knitr::include_graphics("image/filter.png")
 
 `filter()` is an extremely powerful function. It lets us subset our data according to specific criteria.
 
-Let's filter on a `numeric` variable, `cigarettes_per_day`:
+Let's filter on a `numeric` variable "grams of fat", `fat`:
 
 ```{r}
 cereals %>%
   filter(fat < 3)
-
 ```
 
 We can also filter on a category. But that does require us to know the values of that categorical variable.
@@ -239,7 +238,7 @@ We can chain multiple criteria using the `&` (AND) or `|` (OR) operators. But we
 
 If I wanted to return cereals who are
 
-manufactured by `N` **and** have shelf level `1`,
+> manufactured by `N` **and** have shelf level of `1`,
 
 I would want use an `&` to chain these criteria together:
 
@@ -248,14 +247,13 @@ I would want use an `&` to chain these criteria together:
 ```{r}
 cereals %>%
   filter(mfr == "N" & shelf == 1)
-
 ```
 
 If I wanted cereals which are
 
-`N` **or** shelf 1
+> `N` **or** shelf 1
 
-I would use an `|` to chain these criteria together.
+I would use an `|` to chain these criteria together:
 
 ```{r}
 cereals %>%
@@ -265,8 +263,6 @@ cereals %>%
 Think about it: which of the above two code blocks will return a larger number of patients?
 
 ### How do I know what values exist in a categorical variable?
-
-We've already seen both `skim()` and `glimpse()` can give us an idea of what values exist in a categorical variable.
 
 We can use `distinct()` to grab all of the unique values for a categorical variable, and then use `arrange()` to get at them.
 
@@ -278,7 +274,7 @@ cereals %>%
 
 This can also alert us if there are categorical coding mistakes (such as misspellings) in our data.
 
-Another tidy way to do this is to use the `tabyl()` function from the {janitor} package:
+Another tidy way to do this is to use the `tabyl()` function from the `{janitor}` package:
 
 ```{r}
 library(janitor)
@@ -310,7 +306,7 @@ This is a useful reference for all the different operators (both logical and com
 knitr::include_graphics("image/dplyr_mutate.png")
 ```
 
-So what is mutate? `mutate()` is one of the most useful `dplyr` verbs. You can use it to transform data (variables in your `data.frame`) and add it as a new variable into the data.frame.
+So what is mutate? `mutate()` is one of the most useful `dplyr` verbs. You can use it to transform data (variables in your `data.frame`) and add it as a new variable into the `data.frame`.
 
 ```{r}
 knitr::include_graphics("image/mutate.png")
@@ -325,7 +321,7 @@ I tend to think of this much like adding a formula in Excel to calculate the val
 
 ## Using `mutate` to calculate a new variable based on other variables
 
-One use for `mutate` is to do Excel type calculations using other columns on the data. For instance, we might want to calculate the sum of `age_at_diagnoses`and `days_to_death` to get the `age_at_death`.
+One use for `mutate` is to do Excel type calculations using other columns on the data. For instance, we might want to calculate the sum of `fat_and_sugar_calories` from `sugars` and `fat`.
 
 ```{r}
 cereals %>% 
@@ -377,7 +373,7 @@ vis_dat(cereals)
 
 ## Using `mutate` to replace missing values with `replace_na`
 
-Sometimes we want to fill in missing values with a certain value. We can use the `replace_na()` function inside of `mutate()` to specify this. For example, if the days to last follow up is missing, we want to set their days to follow up to 0. The first two observations in this data have missing follow up, but when we replace them we note they are now equal to 0:
+Sometimes we want to fill in missing values with a certain value. We can use the `replace_na()` function inside of `mutate()` to specify this. For example, if the milligrams of sodium is missing, we want to set their milligrams of sodium to 0. In the `cereals` dataset, the 27th and 55th observations in this data have missing sodium values, but when we replace them we note they are now equal to 0:
 
 ```{r}
 cereals %>%
@@ -396,11 +392,11 @@ How would we do that?
 
 Well, we need to follow the basic pattern for each of our categories:
 
-*condition* \~ *category name*
+> *condition* \~ *category_name*
 
-The *left* side of the `~` is where we can specify how we define the \*category&.
+The *left* side of the `~` is where we can specify how we define the *category*.
 
-The *right* side of the `~` is where we can specify the *category name* (as a character).
+The *right* side of the `~` is where we can specify the *category_name* (as a character).
 
 In the example below,
 
@@ -461,7 +457,7 @@ knitr::include_graphics("image/summarize.png")
 
 The `summarize()` verb produces summaries across your data.
 
-For example, if I wanted to find the average `cigarettes_per_day` across all my data, I'd do this:
+For example, if I wanted to find the average `calories` across all my data, I'd do this:
 
 ```{r}
 cereals %>%
@@ -479,9 +475,9 @@ cereals %>%
 
 ```
 
-What are the kinds of things that summarize is useful for?
+What are the kinds of things that `summarize` is useful for?
 
-Useful functions (from <https://dplyr.tidyverse.org/reference/summarise.html>)
+Useful functions (from <https://dplyr.tidyverse.org/reference/summarise.html>):
 
 -   Center: `mean()`, `median()`
 -   Spread: `sd()` (standard deviation)
@@ -499,7 +495,7 @@ knitr::include_graphics("image/group_by.png")
 
 These two verbs always go together. `group_by()` doesn't do anything by itself, output wise. But what it does is split our data frame into a number of smaller `data.frame`s split out by category. Then we use `summarize` to do some sort of summary calculation (such as counting or calculating the mean) on these smaller `data.frame`s:
 
-For example, if we want to calculate the mean `cigarettes_per_day` smoked between `male`s and `female`s, we'd do the following:
+For example, if we want to calculate the mean `calories` by different `shelf` levels, we'd do the following:
 
 ```{r}
 cereals %>%
@@ -509,7 +505,7 @@ cereals %>%
 
 ## `group_by()/summarize` to calculate mean and standard deviation values
 
-Below, we'll calculate the average number of cigarettes smoked per day for males and females, and the standard deviation.
+Below, we'll calculate the average number of `calories`, and the standard deviation.
 
 ```{r}
 cereals %>%
@@ -620,7 +616,7 @@ Keep that in mind!
 
 ## Saving our results
 
-Let's save our processed data in the `data/` directory. We'll save it as a `csv` file, which is short for *comma separated value*. This is a file type that can be easily imported into excel.
+Let's save our processed data in the `data/` directory. We'll save it as a `csv` file, which is short for *comma separated value*. This is a file type that can be easily imported into Excel.
 
 ```{r}
 processed_data <- cereals %>%
@@ -628,7 +624,7 @@ processed_data <- cereals %>%
   filter(sodium < 100)
 
 write_excel_csv(x = processed_data,
-                path = "data/processed_data.csv")
+                file = "data/processed_data.csv")
 ```
 
 # Final Assignment: Be Creative
