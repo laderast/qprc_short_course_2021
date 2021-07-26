@@ -2,8 +2,8 @@
 title: 'Part 3: Parametrized Reporting with RMarkdown and friends'
 author: "Ted Laderas"
 date: "`r Sys.Date()`"
-output: html_document
-#output: word_document
+#output: html_document
+output: word_document
 #output: slidy_presentation
 #output: distill::distill_article()
 params: 
@@ -20,12 +20,59 @@ library(broom)
 library(dplyr)
 ```
 
+## Report for `r params$date`
+
+This is an example of a parametrized report that you can build with RMarkdown.
+
+## The act of knitting
+
+Try clicking the "Knit" button above (You may have to allow the popup or reload it). You will see that the RMarkdown window above is doing what's called "knitting". 
+
+**Knitting** is running code and combining it with the text, or Markdown output. 
+
+## The Powerful thing about RMarkdown
+
+You can output it to many different kinds of outputs. 
+
+Try uncommenting one of the above `output:` lines (make sure to comment the current one out), and try out a different format.
+
 ## Streams as Data Sources
 
+Working with process data is working with a *stream* of data. There are some challenges with this:
 
+- Data stream is changing and you need to be responsive
+- Not all of the data is available at once
+- Data can get stale (become non-useful) as a matter of time
+
+## Working with Stream Data
+
+Whether it be from a database or directly from an instrument, or from an updated spreadsheet, you can specify a stream as a data source.
+
+You can think of a data stream as an infinitely long `data.frame`.
+
+Datastreams can be piped through `ggplot2` or `dplyr` just as well as a static csv file.
+
+
+## Enter RMarkdown and parametrized reporting
+
+Say you need to produce a daily summary report utilizing data from yesterday. There are various routes to this:
+
+1. Copy paste your R-markdown code, modify each day
+2. Have a template report that is automatically knitted each day with yesterday's date as a parameter.
+
+Number 2 is much, much easier and less error prone.
+
+
+## Parametrized R Markdown
+
+Notice there's a field above called `params`. We're providing today's date as a parameter.
 
 
 ## Get Stock prices
+
+For our data stream, we're going to access stock data using `{tidyquant}`. 
+
+We want to get information about General Mills ("GIS") and Kellogg's ("K"). 
 
 ```{r}
 tickers = c("GIS", "K")
@@ -36,7 +83,33 @@ prices <- tq_get(tickers,
                  get = "stock.prices")
 ```
 
-## Plot the stocks from that day
+## Automating a parametrized report
+
+More importantly, we can *automate* this using the command line. We can set a script to run at a particular time using a scheduler workflow app such as `cron` (linux). We can set up a command line script called `runReport.R` that contains the following:
+
+```
+rmarkdown::render("part3.Rmd")
+```
+
+## Running a script on the command line
+
+We can run our script `runReport.R` on the command line using Rscript:
+
+```
+Rscript runReport.R
+```
+
+More info about RScript/automating tools here: https://support.rstudio.com/hc/en-us/articles/218012917-How-to-run-R-scripts-from-the-command-line
+
+## Sample of the data
+
+```{r}
+prices[1:10,]
+
+```
+
+
+## Plot the stocks from "2017-01-01" to today
 
 ```{r}
 prices %>%
@@ -47,4 +120,31 @@ prices %>%
       y=adjusted, color=symbol) +
   geom_line()
 ```
+
+## Some comments on the data
+
+For today, `r params$date`, we see the following information about Kellogg's stock price versus General Mills stock price.
+
+
+
+## Packages that are helpful for data streams
+
+- [`{dbplyr}`](https://dbplyr.tidyverse.org/) - if your stream comes from a database, dbplyr will translate it to SQL
+- [`{sparklyr}`](https://spark.rstudio.com/) - if your stream is very large, you can use Spark to analyze it. 
+- [`{Microsoft365R}`](https://github.com/Azure/Microsoft365R) - access data on Azure/Sharepoint
+
+
+## Where Next?
+
+There are a lot of directions you can go now.
+
+- You can start modeling your data using [`{tidymodels}`](https://www.tidymodels.org/)
+- You can start building interactive reports using [`{shiny}`](https://shiny.rstudio.com)
+- You can start building websites with Rmarkdown!
+
+There's a whole wide world out there to learn!
+
+## Stay in Touch
+
+[tedladeras] at [gmail.com]
 

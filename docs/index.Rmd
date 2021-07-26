@@ -8,6 +8,7 @@ author:
   - first_name: "Eric"
     last_name: "Leung"
     url: https://erictleung.com/
+    affiliation: Data Scientist, Disney
 description: |
   Website for the QPRC Short Course on the Tidyverse
 site: distill::distill_website
@@ -86,6 +87,9 @@ knitr::include_url("https://laderast.github.io/qprc_short_course_2021/slides/rma
 ```
 
 ## Further Resources
+
+- [RMarkdown at RStudio](https://rmarkdown.rstudio.com/)
+- [RMarkdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
 
 ```{r}
 knitr::include_url("https://slides.djnavarro.net/starting-rmarkdown/#1")
