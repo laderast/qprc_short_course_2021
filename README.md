@@ -32,6 +32,12 @@ By the end of this short course, you should be able to:
 - **Build** and reuse a parametrized RMarkdown report
 - **Visualize** time-series data from a data stream
 
+## Dataset Used
+
+We use the 80 cereals dataset from Kaggle:  https://www.kaggle.com/crawford/80-cereals
+
+## Posit Cloud Project
+
 You can clone this project on Posit Cloud here: https://posit.cloud/content/2728260
 
 Get started by opening `part1.Rmd` and start executing code cells.
